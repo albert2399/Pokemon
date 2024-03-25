@@ -1,0 +1,72 @@
+.container{
+    height: 100vh;
+    width: 100vw;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(33,37,41);
+}
+
+.content{
+    display: flex;
+    width: 100%;
+    margin: 0 20px;
+}
+
+#navbarNav{
+    justify-self: end;
+}
+
+.navbar-brand{
+    margin-left: 18%;
+}
+
+
+button{
+    align-self: flex-end;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(33,37,41);
+    color: white;
+    flex-direction: column;
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+.links{
+    display: flex;
+    gap: 30px;
+}
+
+.pokedex{
+    height: 100vh;
+    width: 100%;
+    background-color: azure;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 25px;
+    padding-top: 3%;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: yellow!important;
+}
+
+.type-pokemon{
+    width: 41px;
+    border-radius: 50px;
+    padding: 10px;
+}
+
