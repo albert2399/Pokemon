@@ -15,7 +15,7 @@
 <body>
     <div class="container-fluid">
         <div class="header">
-            <a href="#">
+            <a href="index.html">
                 <img src="./logo.png" alt="" height="75" width="200">
             </a>
             
@@ -28,7 +28,7 @@
                 </button>
         
                 <!-- Logo y título -->
-                <a class="navbar-brand" href="#"><img src="./icon.png" alt="" height="50" width="50" style="margin-top: 2%; margin-left: 2%;"></a>
+                <a class="navbar-brand" href="index.html"><img src="./icon.png" alt="" height="50" width="50" style="margin-top: 2%; margin-left: 2%;"></a>
                 
                 <form class="d-flex align-items-center">
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
@@ -54,18 +54,19 @@
            
         <div class="description">
             <div class="info">
-                <h1>Pikachu</h1>
-                <h1 id="white">#025</h1>
+                <h1 id="nombrePokemon"></h1>
+                <h1 id="numeroPokemon"></h1>
             </div>
             <div class="status">
                 <div class="img">
-                    <img src="pikachu.png" alt="">
+                    <img id="imagenPokemon" src="" alt="">
                 </div>
                 <div class="attributes">
-                    <span id="description">Cuando se enfada, este Pokémon descarga la energía que almacena en el interior de las bolsas de las mejillas.</span>
+                    <span id="descripcionPokemon"></span>
                     <br>
-                    <div class="stats">
-                            <div class="list">
+                    <div class="stats" id="statsPokemon">
+
+                            <!-- <div class="list">
                                 <span class="name">Altura</span>
                                 <span class="value">0.4m</span>
                             </div>
@@ -84,21 +85,21 @@
                             <div class="list">
                                 <span class="name">Sexo</span>
                                 <span class="value"></span>
-                            </div>
+                            </div> -->
                     </div>
                 </div>
                 <div class="graphic">
                     <img src="stats.PNG" alt="">
                 </div>
-                <div class="type">
-                    <span>Tipo</span>
+                <div class="type" id="tipoPokemon">
+                    <!-- <span>Tipo</span>
                     <ul class="hypa">
                         <li id="electric">Electrico</li>
                     </ul>
                     <span>Debilidades</span>
                     <ul class="hypa">
                         <li id="tierra">Tierra</li>
-                    </ul>
+                    </ul> -->
                 </div>
 
             </div>
@@ -106,7 +107,7 @@
              
  
     </div>
-    <footer class="footer mt-auto">
+    <footer class="footer">
         © 2024 - Albert Fernandez PokeApi Web Project
         <div class="links">
             <a href="#">LinkedIn</a>
