@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PokeAPI - Cadena de Evolución</title>
+</head>
+<body>
+  <h1>Cadena de Evolución de Pikachu</h1>
+  <div id="evolutionChain"></div>
+
+  <script>
+    async function obtenerCadenaEvolucion(nombrePokemon) {
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${nombrePokemon}`);
+        const data = await response.json();
+        const evolutionChainUrl = data.evolution_chain.url;
+        const evolutionChainResponse = await fetch(evolutionChainUrl);
+        const evolutionChainData = await evolutionChainResponse.json();
+        return evolutionChainData;
+      } catch (error) {
+        console.error('Error al obtener la cadena de evolución:', error);
+        throw error;
+      }
+    }
+
+    async function obtenerDatosPokemonPorNombre(nombrePokemon) {
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombrePokemon.toLowerCase()}`);
+        if (!response.ok) {
+          throw new Error('Error al obtener los datos del Pokémon');
+        }
+        const data = await response.json();
+        return data.sprites.other['official-artwork'].front_default;
+      } catch (error) {
+        console.error('Error al obtener los datos del Pokémon:', error);
+        throw error;
+      }
+    }
+
+    window.onload = async function() {
+      const nombrePokemon = 'charmander';
+      const evolutionChainData = await obtenerCadenaEvolucion(nombrePokemon);
+      const evolutionChainDiv = document.getElementById('evolutionChain');
+      const chainDetails = evolutionChainData.chain;
+
+      async function mostrarPokemonEnCadenaEvolutiva(cadena) {
+        const nombresPokemon = [];
+        obtenerNombresCadena(cadena, nombresPokemon);
+        for (const nombre of nombresPokemon) {
+          const imgUrl = await obtenerDatosPokemonPorNombre(nombre);
+          const pokemonElement = document.createElement('div');
+          pokemonElement.innerHTML = `<img src="${imgUrl}" alt="${nombre}"><br>${nombre}`;
+          evolutionChainDiv.appendChild(pokemonElement);
+        }
+      }
+
+      function obtenerNombresCadena(cadena, nombres) {
+        nombres.push(cadena.species.name);
+        if (cadena.evolves_to.length > 0) {
+          obtenerNombresCadena(cadena.evolves_to[0], nombres);
+        }
+      }
+
+      await mostrarPokemonEnCadenaEvolutiva(chainDetails);
+    };
+  </script>
+</body>
+</html>

@@ -154,30 +154,36 @@ function getRandomPokemonId() {
     // Función para obtener la descripción de un Pokémon
     async function obtenerDescripcionPokemon(pokemonName) {
       try {
-        // Construir la URL de la API con el nombre del Pokémon
-        const apiUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonName}`;
-        
-        // Realizar la solicitud GET a la PokeAPI
-        const response = await fetch(apiUrl);
-    
-        // Verificar si la solicitud fue exitosa
-        if (!response.ok) {
-          throw new Error('Error al obtener la descripción del Pokémon');
-        }
-    
-        // Convertir la respuesta a JSON
-        const data = await response.json();
-    
-        // Extraer la descripción del Pokémon
-        const description = data.flavor_text_entries[0].flavor_text;
-    
-        // Devolver la descripción
-        return description;
+          // Construir la URL de la API con el nombre del Pokémon
+          const apiUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonName}`;
+          
+          // Realizar la solicitud GET a la PokeAPI
+          const response = await fetch(apiUrl);
+      
+          // Verificar si la solicitud fue exitosa
+          if (!response.ok) {
+              throw new Error('Error al obtener la descripción del Pokémon');
+          }
+      
+          // Convertir la respuesta a JSON
+          const data = await response.json();
+      
+          // Buscar la descripción en inglés
+          let description = '';
+          for (const entry of data.flavor_text_entries) {
+              if (entry.language.name === 'en') {
+                  description = entry.flavor_text;
+                  break; // Salir del bucle una vez que se encuentra la descripción en inglés
+              }
+          }
+      
+          // Devolver la descripción
+          return description;
       } catch (error) {
-        console.error('Error:', error);
-        return 'Error 404'; // Opcional: Devolver un valor predeterminado en caso de error
+          console.error('Error:', error);
+          return 'Error 404'; // Opcional: Devolver un valor predeterminado en caso de error
       }
-    }
+  }
   
   
   
@@ -207,7 +213,7 @@ function getRandomPokemonId() {
             // Insertar los tipos y debilidades del Pokémon
             const tipoPokemon = document.getElementById('tipoPokemon');
             tipoPokemon.innerHTML = ''; // Limpiar el contenido existente
-            tipoPokemon.innerHTML = `<span class="xqc">Tipo</span>`;
+            tipoPokemon.innerHTML = `<span class="xqc">Type</span>`;
             data.tipos.forEach(tipo => {
                 const tipoElement = document.createElement('ul');
                 tipoElement.classList.add('hypa');
@@ -254,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
               // Extraer los datos relevantes del Pokémon
               const pokemonData = {
                   nombre: data.name,
-                  numero: data.id,
+                  id: data.id,
                   imagen: data.sprites.front_default,
                   descripcion: data.species.url,
                   stats: data.stats.map(stat => ({ nombre: stat.stat.name, valor: stat.base_stat })),
@@ -262,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   // Otras propiedades del Pokémon que desees incluir
               };
 
-              return pokemonData;
+              return showStats(data.id);
           } catch (error) {
               console.error('Error al obtener los datos del Pokémon:', error);
               throw error; // Re-lanzar el error para que pueda ser manejado por el código que llama a esta función

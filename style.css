@@ -55,7 +55,6 @@ footer{
     /* grid-template-rows: repeat(5, 1fr); */
     gap: 25px;
     padding-top: 3%;
-    padding-left: 6%;
 }
 
 .card{
@@ -149,6 +148,7 @@ footer{
     width: 80%;
     height: 50%;
     margin: 0 auto;
+    text-align: center;
 }
 
 .type{
@@ -180,4 +180,17 @@ footer{
 .xqc{
     margin: 0 auto;
     border-bottom: solid 1px lightgray;
+}
+
+
+#evolutionChain{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    text-align: center;
+    background-color: lightgray;
+    border-radius: 3px;
 }
